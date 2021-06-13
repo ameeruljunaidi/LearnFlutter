@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       "questionText": "What is your name?",
       "answers": [
         {"text": "John", "score": 10},
-        {"text": "Ezekiel", "score": 8},
+        {"text": "Ezekiel", "score": 5},
       ],
     },
   ];
@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
                 questionIndex: _questionIndex,
                 questions: _questions,
               )
-            : Result(),
+            : Result(_totalScore),
       ),
     );
   }
