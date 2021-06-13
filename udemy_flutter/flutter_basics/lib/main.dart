@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   runApp(
@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
-  static const questions = [
+  static const _questions = [
     {
       "questionText": "Who is the best driver on the grid now?",
       "answers": ["Lewis", "Max", "Lando", "Sergio"],
@@ -40,10 +40,6 @@ class _MyAppState extends State<MyApp> {
         _questionIndex = _questionIndex + 1;
       },
     );
-
-    if (_questionIndex < questions.length) {
-      print("We have more questions!");
-    }
   }
 
   @override
@@ -54,17 +50,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text("Question & Answers App"),
         ),
-        body: Column(
-          children: [
-            Question(
-              questions[_questionIndex]['questionText'],
-            ),
-            ...(questions[_questionIndex]['answers'] as List<String>)
-                .map((answer) {
-              return Answer(_answerQuestion, answer);
-            }).toList()
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(),
       ),
     );
   }
