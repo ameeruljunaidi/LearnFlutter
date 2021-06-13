@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Question extends StatelessWidget {
-  final String questionText;
+  // ignore: prefer_typing_uninitialized_variables
+  final questionText;
 
   // ignore: use_key_in_widget_constructors
   const Question(this.questionText);

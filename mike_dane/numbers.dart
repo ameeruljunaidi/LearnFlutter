@@ -8,6 +8,6 @@ void main() {
   // quantity++;
 
   print(
-    min(1, 9), // which one is smaller
+    min(quantity, price), // which one is smaller
   );
 }

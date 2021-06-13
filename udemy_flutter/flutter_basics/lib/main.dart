@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() {
   runApp(
@@ -18,43 +19,50 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
+  static const questions = [
+    {
+      "questionText": "Who is the best driver on the grid now?",
+      "answers": ["Lewis", "Max", "Lando", "Sergio"],
+    },
+    {
+      "questionText": "Which is the best contructor?",
+      "answers": ["Mercedes", "Red Bull", "Ferrari", "McLaren"],
+    },
+    {
+      "questionText": "Which is the best track?",
+      "answers": ["Spa", "Suzuka", "Italy", "Catalunya"],
+    },
+  ];
+
   void _answerQuestion() {
     setState(
       () {
         _questionIndex = _questionIndex + 1;
       },
     );
+
+    if (_questionIndex < questions.length) {
+      print("We have more questions!");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      "What's your favorite color?",
-      "What's your favorite animal?"
-    ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Hello"),
+          title: const Text("Question & Answers App"),
         ),
         body: Column(
           children: [
             Question(
-              questions.elementAt(_questionIndex),
+              questions[_questionIndex]['questionText'],
             ),
-            ElevatedButton(
-              child: const Text("Answer 1"),
-              onPressed: _answerQuestion,
-            ),
-            ElevatedButton(
-              child: const Text("Answer 2"),
-              onPressed: _answerQuestion,
-            ),
-            ElevatedButton(
-              child: const Text("Answer 3"),
-              onPressed: _answerQuestion,
-            ),
+            ...(questions[_questionIndex]['answers'] as List<String>)
+                .map((answer) {
+              return Answer(_answerQuestion, answer);
+            }).toList()
           ],
         ),
       ),

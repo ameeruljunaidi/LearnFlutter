@@ -5,4 +5,7 @@ void main() {
   bool isRegisteredVoter = true;
 
   print(firstName);
+  print(age);
+  print(gpa);
+  print(isRegisteredVoter);
 }
