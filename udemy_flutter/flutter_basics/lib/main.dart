@@ -7,9 +7,30 @@ void main() {
 }
 
 // ignore: use_key_in_widget_constructors
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  var questionIndex = 0;
+
+  void answerQuestion() {
+    setState(
+      () {
+        questionIndex = questionIndex + 1;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var questions = [
+      "What's your favorite color?",
+      "What's your favorite animal?"
+    ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -18,18 +39,20 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text("The question!"),
-            RaisedButton(
-              child: Text("Answer 1"),
-              onPressed: null,
+            Text(
+              questions.elementAt(questionIndex),
             ),
             RaisedButton(
-              child: Text("Answer 2"),
-              onPressed: null,
+              child: const Text("Answer 1"),
+              onPressed: answerQuestion,
             ),
             RaisedButton(
-              child: Text("Answer 3"),
-              onPressed: null,
+              child: const Text("Answer 2"),
+              onPressed: answerQuestion,
+            ),
+            RaisedButton(
+              child: const Text("Answer 3"),
+              onPressed: answerQuestion,
             ),
           ],
         ),
