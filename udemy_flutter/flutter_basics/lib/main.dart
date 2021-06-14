@@ -19,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   static const _questions = [
     {
-      "questionText": "Who is the best driver on the grid now?",
+      "questionText": "Which driver sucks dicks?",
       "answers": [
         {"text": "Lewis", "score": 10},
         {"text": "Max", "score": 8},
