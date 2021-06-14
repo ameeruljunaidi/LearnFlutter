@@ -1,4 +1,5 @@
 import 'package:expense_app/transaction.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// ignore: use_key_in_widget_constructors
+// ignore: use_key_in_widget_constructors, must_be_immutable
 class MyHomePage extends StatelessWidget {
   final List<Transaction> transactions = [
     Transaction(
@@ -26,11 +27,14 @@ class MyHomePage extends StatelessWidget {
     ),
     Transaction(
       id: "t2",
-      title: "New Bad",
-      amount: 129.99,
+      title: "New Bag",
+      amount: 29.99,
       date: DateTime.now(),
     ),
   ];
+
+  String titleInput = "Title";
+  String amountInput = "Amount";
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,7 @@ class MyHomePage extends StatelessWidget {
         title: const Text('Flutter App'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           // ignore: sized_box_for_whitespace
@@ -48,6 +52,36 @@ class MyHomePage extends StatelessWidget {
             child: const Card(
               color: Colors.blue,
               child: Text("CHART!"),
+            ),
+          ),
+          Card(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  TextField(
+                    decoration: const InputDecoration(labelText: "Title"),
+                    onChanged: (value) {
+                      titleInput = value;
+                    },
+                  ),
+                  TextField(
+                    decoration: const InputDecoration(labelText: "Amount"),
+                    onChanged: (value) {
+                      titleInput = value;
+                    },
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(primary: Colors.purple),
+                    onPressed: () {
+                      print(titleInput);
+                      print(amountInput);
+                    },
+                    child: const Text("Add Transaction"),
+                  )
+                ],
+              ),
             ),
           ),
           Column(
@@ -62,21 +96,35 @@ class MyHomePage extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.black,
+                          color: Colors.purple,
                           width: 2,
                         ),
                       ),
                       padding: const EdgeInsets.all(10),
                       child: Text(
-                        tx.amount.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        "\$${tx.amount}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.purple,
+                        ),
                       ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(tx.title),
                         Text(
-                          tx.date.toString(),
+                          tx.title,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          DateFormat.yMMMd().format(tx.date),
+                          style: const TextStyle(
+                            color: Colors.grey,
+                          ),
                         ),
                       ],
                     )
