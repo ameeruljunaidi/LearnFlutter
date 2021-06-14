@@ -75,8 +75,6 @@ class MyHomePage extends StatelessWidget {
                   TextButton(
                     style: TextButton.styleFrom(primary: Colors.purple),
                     onPressed: () {
-                      print(titleInput);
-                      print(amountInput);
                     },
                     child: const Text("Add Transaction"),
                   )
