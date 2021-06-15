@@ -1,0 +1,211 @@
+{
+    // General VS Code settings
+    "explorer.confirmDelete": false,
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    // Jupyter settings
+    "jupyter.askForKernelRestart": false,
+    "jupyter.interactiveWindowMode": "single",
+    "jupyter.alwaysTrustNotebooks": true,
+    "jupyter.textOutputLimit": 0,
+    "jupyter.enableCellCodeLens": false,
+    // Python settings
+    "python.pythonPath": "/home/ajunaidi/anaconda3/bin/python",
+    "python.languageServer": "Pylance",
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "C:\\Users\\ameer\\Anaconda3\\Scripts\\black.exe",
+    "python.formatting.autopep8Path": "C:\\Users\\ameer\\Anaconda3\\Scripts\\autopep8.exe",
+    "python.insidersChannel": "daily",
+    // R settings
+    "r.bracketedPaste": true,
+    "r.rpath.windows": "C:\\Users\\AJ\\anaconda3\\Scripts\\R.exe",
+    "r.rterm.windows": "C:\\Users\\AJ\\anaconda3\\Scripts\\radian.exe",
+    "r.rterm.option": [],
+    // Code runner settings
+    "code-runner.clearPreviousOutput": true,
+    "code-runner.saveFileBeforeRun": true,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    // "code-runner.showExecutionMessage": false,
+    // Editor settings
+    "editor.fontFamily": "Consolas, 'Courier New', monospace, 'Cascadia Code PL'",
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": true,
+    "editor.lineNumbers": "relative",
+    "editor.formatOnSave": false,
+    "[python]": {
+        "editor.formatOnSave": true,
+    },
+    "[json]": {
+        "editor.formatOnSave": true,
+    },
+    "editor.fontLigatures": true,
+    "editor.suggestSelection": "first",
+    "editor.tokenColorCustomizations": {
+        "comments": "#8a8a8a"
+    },
+    "editor.rulers": [
+        88
+    ],
+    "editor.fontWeight": 200,
+    // Latex settings
+    "latex-workshop.view.pdf.viewer": "tab",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.chktex.run": "onType",
+    // Vim settings
+    "vim.useSystemClipboard": true,
+    "vim.leader": "<space>",
+    "vim.autoindent": true,
+    "vim.hlsearch": true,
+    "vim.ignorecase": true,
+    "vim.smartcase": true,
+    "vim.easymotion": true,
+    "vim.easymotionDimBackground": true,
+    "vim.surround": true,
+    // "vim.useCtrlKeys": true,
+    // Vim keybindings
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "<tab>"
+            ],
+            "commands": [
+                "workbench.action.nextEditor"
+            ]
+        },
+        {
+            "before": [
+                "<S-tab>"
+            ],
+            "commands": [
+                "workbench.action.previousEditor"
+            ]
+        },
+        {
+            "before": [
+                "<C-a>"
+            ],
+            "after": [
+                "m",
+                "z",
+                "g",
+                "g",
+                "V",
+                "G",
+                "y",
+                "'",
+                "z"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                ">"
+            ],
+            "after": [
+                ">",
+                "g",
+                "v"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "after": [
+                "<",
+                "g",
+                "v"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "<leader>",
+                "w"
+            ],
+            "commands": [
+                "workbench.action.splitEditor"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "e"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "f"
+            ],
+            "commands": [
+                "revealInExplorer"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "r",
+                "f"
+            ],
+            "commands": [
+                "fileutils.renameFile"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "h"
+            ],
+            "after": [
+                "_"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l"
+            ],
+            "after": [
+                "$"
+            ]
+        }
+    ],
+    "terminal.integrated.inheritEnv": false,
+    "workbench.startupEditor": "none",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+
+    // Dart settings
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false,
+    },
+    "dart.previewFlutterUiGuides": true,
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "dart.openDevTools": "flutter",
+    "files.associations": {
+        "*.dart": "dart"
+    },
+    "dart.showInspectorNotificationsForWidgetErrors": false,
+}
