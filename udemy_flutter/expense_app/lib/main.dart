@@ -25,7 +25,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter App'),
+        title: const Text('Does this work'),
       ),
       body: SingleChildScrollView(
         child: Column(
