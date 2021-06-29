@@ -9,11 +9,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Personal Expenses',
-      home: MyHomePage(),
-      theme: ThemeData(primarySwatch: Colors.red),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Personal Expenses',
+        home: MyHomePage(),
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          accentColor: Colors.amber,
+          fontFamily: 'Quicksand',
+        ));
   }
 }
 
