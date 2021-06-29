@@ -90,7 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBar(
-        title: Text('Personal Expenses'),
+        title: Text(
+          'Personal Expenses',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: <Widget>[
           IconButton(
             onPressed: () => _startAddNewTransaction(context),
