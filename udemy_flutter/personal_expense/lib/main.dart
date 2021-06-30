@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expense/models/transaction.dart';
+import 'package:personal_expense/models/transaction_samples.dart';
 import 'package:personal_expense/widgets/chart.dart';
 import 'package:personal_expense/widgets/transaction_list.dart';
 import 'package:personal_expense/widgets/new_transaction.dart';
@@ -36,20 +37,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 1.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'New Car',
-      amount: 2.99,
-      date: DateTime.now(),
-    )
-  ];
+  final List<Transaction> _userTransactions = transactionSamples;
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
@@ -98,30 +86,45 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text(
+        'Personal Expenses',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      actions: <Widget>[
+        IconButton(
+          onPressed: () => _startAddNewTransaction(context),
+          icon: Icon(Icons.add),
+        ),
+      ],
+    );
     return Scaffold(
+      appBar: appBar,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _startAddNewTransaction(context),
         child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      appBar: AppBar(
-        title: Text(
-          'Personal Expenses',
-          style: TextStyle(fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.3,
+              child: Chart(_recentTransactions),
+            ),
+            Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.7,
+              child: TransactionList(_userTransactions, _deleteTransaction),
+            )
+          ],
         ),
-        actions: <Widget>[
-          IconButton(
-            onPressed: () => _startAddNewTransaction(context),
-            icon: Icon(Icons.add),
-          ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Chart(_recentTransactions),
-          TransactionList(_userTransactions, _deleteTransaction)
-        ],
       ),
     );
   }
