@@ -29,11 +29,11 @@ class MyApp extends StatelessWidget {
         errorColor: Colors.grey,
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
-              headline6: TextStyle(
+              headline6: const TextStyle(
                 fontFamily: 'Quicksand',
                 fontWeight: FontWeight.bold,
               ),
-              button: TextStyle(color: Colors.white),
+              button: const TextStyle(color: Colors.white),
             ),
       ),
     );
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Transaction> get _recentTransactions {
     return _userTransactions.where((tx) {
-      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+      return tx.date!.isAfter(DateTime.now().subtract(const Duration(days: 7)));
     }).toList();
   }
 
@@ -100,10 +100,10 @@ class _MyHomePageState extends State<MyHomePage> {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
 
-    final appBar;
+    final PreferredSizeWidget appBar;
     if (Platform.isIOS) {
       appBar = CupertinoNavigationBar(
-        middle: Text(
+        middle: const Text(
           'Personal Expenses',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -111,28 +111,28 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             GestureDetector(
-              child: Icon(CupertinoIcons.add),
               onTap: () => _startAddNewTransaction(context),
+              child: const Icon(CupertinoIcons.add),
             )
           ],
         ),
       );
     } else {
       appBar = AppBar(
-        title: Text(
+        title: const Text(
           'Personal Expenses',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: <Widget>[
           IconButton(
             onPressed: () => _startAddNewTransaction(context),
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
           ),
         ],
       );
     }
 
-    final txListWidget = Container(
+    final txListWidget = SizedBox(
       height: (mediaQuery.size.height -
               appBar.preferredSize.height -
               mediaQuery.padding.top) *
@@ -165,7 +165,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             if (!isLandscape)
-              Container(
+              SizedBox(
                 height: (mediaQuery.size.height -
                         appBar.preferredSize.height -
                         mediaQuery.padding.top) *
@@ -175,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if (!isLandscape) txListWidget,
             if (isLandscape)
               _showChart
-                  ? Container(
+                  ? SizedBox(
                       height: (mediaQuery.size.height -
                               appBar.preferredSize.height -
                               MediaQuery.of(context).padding.top) *
@@ -188,22 +188,23 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
 
-    return Platform.isIOS
-        ? CupertinoPageScaffold(
-            child: pageBody,
-            navigationBar: appBar,
-          )
-        : Scaffold(
-            appBar: appBar,
-            floatingActionButton: Platform.isIOS
-                ? Container()
-                : FloatingActionButton(
-                    onPressed: () => _startAddNewTransaction(context),
-                    child: Icon(Icons.add),
-                  ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerFloat,
-            body: pageBody,
-          );
+    if (Platform.isIOS) {
+      return Scaffold(
+        appBar: appBar,
+        body: pageBody,
+      );
+    } else {
+      return Scaffold(
+        appBar: appBar,
+        floatingActionButton: Platform.isIOS
+            ? Container()
+            : FloatingActionButton(
+                onPressed: () => _startAddNewTransaction(context),
+                child: const Icon(Icons.add),
+              ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        body: pageBody,
+      );
+    }
   }
 }

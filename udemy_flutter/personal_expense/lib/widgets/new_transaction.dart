@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
-  final addTx;
+  const NewTransaction(this.addTx);
 
-  NewTransaction(this.addTx);
+  final dynamic addTx;
 
   @override
   _NewTransactionState createState() => _NewTransactionState();
@@ -70,17 +70,18 @@ class _NewTransactionState extends State<NewTransaction> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText: 'Title'),
+                decoration: const InputDecoration(labelText: 'Title'),
                 controller: _titleController,
                 onSubmitted: (_) => _submitData(),
               ),
               TextField(
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
                 controller: _amountController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType:
+                    const TextInputType.numberWithOptions(decimal: true),
                 onSubmitted: (_) => _submitData(),
               ),
-              Container(
+              SizedBox(
                 height: 80,
                 child: Row(
                   children: <Widget>[
@@ -96,7 +97,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       style: TextButton.styleFrom(
                           primary: Theme.of(context).primaryColorDark),
                       onPressed: _presentDatePicker,
-                      child: Text(
+                      child: const Text(
                         'Choose Date',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -106,10 +107,10 @@ class _NewTransactionState extends State<NewTransaction> {
               ),
               ElevatedButton(
                 onPressed: _submitData,
-                child: Text('Add Transaction'),
                 style: TextButton.styleFrom(
                   primary: Theme.of(context).textTheme.button!.color,
                 ),
+                child: const Text('Add Transaction'),
               )
             ],
           ),

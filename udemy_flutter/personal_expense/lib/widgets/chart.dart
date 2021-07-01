@@ -4,9 +4,9 @@ import 'package:personal_expense/models/transaction.dart';
 import 'package:personal_expense/widgets/chart_bar.dart';
 
 class Chart extends StatelessWidget {
-  final List<Transaction> recentTransactions;
+  const Chart(this.recentTransactions);
 
-  Chart(this.recentTransactions);
+  final List<Transaction> recentTransactions;
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
@@ -14,10 +14,10 @@ class Chart extends StatelessWidget {
       double totalSum = 0.0;
 
       for (var i = 0; i < recentTransactions.length; i++) {
-        if (recentTransactions[i].date.day == weekDay.day &&
-            recentTransactions[i].date.month == weekDay.month &&
-            recentTransactions[i].date.year == weekDay.year) {
-          totalSum += recentTransactions[i].amount;
+        if (recentTransactions[i].date!.day == weekDay.day &&
+            recentTransactions[i].date!.month == weekDay.month &&
+            recentTransactions[i].date!.year == weekDay.year) {
+          totalSum += recentTransactions[i].amount!;
         }
       }
 
@@ -30,7 +30,7 @@ class Chart extends StatelessWidget {
 
   double get totalSpending {
     return groupedTransactionValues.fold(0.0, (previousValue, element) {
-      return previousValue + (element['amount'] as double);
+      return previousValue + (element['amount']! as double);
     });
   }
 
@@ -38,20 +38,20 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Padding(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransactionValues.map((data) {
             return Flexible(
               fit: FlexFit.tight,
               child: ChartBar(
-                  label: (data['day'] as String),
-                  spendingAmount: (data['amount'] as double),
+                  label: data['day']! as String,
+                  spendingAmount: data['amount']! as double,
                   spendingPctOfTotal: totalSpending == 0.0
                       ? 0.0
-                      : (data['amount'] as double) / totalSpending),
+                      : (data['amount']! as double) / totalSpending),
             );
           }).toList(),
         ),
