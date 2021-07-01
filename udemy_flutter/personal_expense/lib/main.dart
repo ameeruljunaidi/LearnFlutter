@@ -51,14 +51,14 @@ class _MyHomePageState extends State<MyHomePage> {
   bool _showChart = false;
 
   List<Transaction> get _recentTransactions {
-    return _userTransactions.where((tx) {
+    return _userTransactions.where((Transaction tx) {
       return tx.date!.isAfter(DateTime.now().subtract(const Duration(days: 7)));
     }).toList();
   }
 
   void _addNewTransaction(
       String txTitle, double txAmount, DateTime chosenDate) {
-    final newTx = Transaction(
+    final Transaction newTx = Transaction(
       title: txTitle,
       amount: txAmount,
       date: chosenDate,
@@ -87,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(
       () {
         _userTransactions.removeWhere(
-          (tx) {
+          (Transaction tx) {
             return tx.id == id;
           },
         );
@@ -97,8 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final isLandscape = mediaQuery.orientation == Orientation.landscape;
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final PreferredSizeWidget appBar;
     if (Platform.isIOS) {
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    final txListWidget = SizedBox(
+    final SizedBox txListWidget = SizedBox(
       height: (mediaQuery.size.height -
               appBar.preferredSize.height -
               mediaQuery.padding.top) *
@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: TransactionList(_userTransactions, _deleteTransaction),
     );
 
-    final pageBody = SafeArea(
+    final SafeArea pageBody = SafeArea(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -156,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Switch.adaptive(
                     activeColor: Theme.of(context).accentColor,
                     value: _showChart,
-                    onChanged: (val) {
+                    onChanged: (bool val) {
                       setState(() {
                         _showChart = val;
                       });
