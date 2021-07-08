@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/providers/cart.dart';
 import 'package:shop_app/providers/products.dart';
 import 'package:shop_app/screens/product_detail_screen.dart';
 import 'package:shop_app/screens/products_overview_screen.dart';
@@ -10,8 +11,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: always_specify_types
-    return ChangeNotifierProvider(
-      create: (BuildContext ctx) => Products(),
+    return MultiProvider(
+      // ignore: always_specify_types
+      providers: [
+        // ignore: always_specify_types
+        ChangeNotifierProvider(create: (BuildContext ctx) => Products()),
+        // ignore: always_specify_types
+        ChangeNotifierProvider(create: (BuildContext ctx) => Cart()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'MyShop',
