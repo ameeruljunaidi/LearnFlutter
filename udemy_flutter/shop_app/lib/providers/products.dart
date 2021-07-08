@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/data/sample_products.dart';
-import 'package:shop_app/models/product.dart';
+import 'package:shop_app/providers/product.dart';
 
 class Products with ChangeNotifier {
   // ignore: always_specify_types

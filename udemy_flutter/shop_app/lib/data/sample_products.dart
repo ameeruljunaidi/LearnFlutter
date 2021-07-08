@@ -1,4 +1,4 @@
-import 'package:shop_app/models/product.dart';
+import 'package:shop_app/providers/product.dart';
 
 // ignore: always_specify_types
 final List<Product> sampleProduct = [
