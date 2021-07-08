@@ -15,11 +15,16 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-  Map<String, CartItem> _items;
+  // ignore: always_specify_types, prefer_final_fields
+  Map<String, CartItem> _items = {};
 
   Map<String, CartItem> get items {
     // ignore: always_specify_types
     return {..._items};
+  }
+
+  int get itemCount {
+    return _items.length;
   }
 
   void addItem(String productId, double price, String title) {
@@ -44,5 +49,6 @@ class Cart with ChangeNotifier {
         ),
       );
     }
+    notifyListeners();
   }
 }
