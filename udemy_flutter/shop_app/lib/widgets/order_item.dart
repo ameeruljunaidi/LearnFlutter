@@ -17,10 +17,10 @@ class OrderItem extends StatelessWidget {
           ListTile(
             title: Text('\$${order.amount}'),
             subtitle: Text(
-              DateFormat('dd MM yyyy hh:mm').format(order.dateTime),
+              DateFormat('dd/MM/yyyy hh:mm').format(order.dateTime),
             ),
-            trailing: const IconButton(
-              icon: Icon(Icons.expand_more),
+            trailing: IconButton(
+              icon: const Icon(Icons.expand_more),
               onPressed: () {},
             ),
           ),
