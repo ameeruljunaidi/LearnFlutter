@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shop_app/data/sample_products.dart';
 import 'package:shop_app/providers/product.dart';
 
 class Products with ChangeNotifier {
   // ignore: always_specify_types
-  final List<Product> _items = sampleProduct;
+  // final List<Product> _items = sampleProduct;
+  List<Product> _items = <Product>[];
 
   List<Product> get items {
     // ignore: always_specify_types
@@ -19,6 +19,37 @@ class Products with ChangeNotifier {
 
   Product findById(String id) {
     return _items.firstWhere((Product prod) => prod.id == id);
+  }
+
+  Future<void> fetchAndSetProduct() async {
+    final Uri url = Uri.https(
+      'shop-app-b0190-default-rtdb.firebaseio.com',
+      '/products.json',
+    );
+
+    try {
+      final http.Response response = await http.get(url);
+      final Map<String, dynamic> extractedData =
+          json.decode(response.body) as Map<String, dynamic>;
+      final List<Product> loadedProducts = <Product>[];
+      extractedData.forEach(
+        (String prodId, dynamic prodData) {
+          loadedProducts.add(
+            Product(
+              id: prodId,
+              title: prodData['title'].toString(),
+              description: prodData['description'].toString(),
+              price: double.parse(prodData['price'].toString()),
+              imageUrl: prodData['imageUrl'].toString(),
+            ),
+          );
+        },
+      );
+      _items = loadedProducts;
+      notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
   }
 
   Future<void> addProduct(Product product) async {
