@@ -22,8 +22,9 @@ class Products with ChangeNotifier {
   }
 
   void addProduct(Product product) {
-    final Uri url = Uri.https(
-      'https://shop-app-b0190-default-rtdb.firebaseio.com',
+    // ignore: prefer_final_locals
+    Uri url = Uri.https(
+      'shop-app-b0190-default-rtdb.firebaseio.com',
       '/products.json',
     );
 
