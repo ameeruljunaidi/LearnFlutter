@@ -21,14 +21,14 @@ class Products with ChangeNotifier {
     return _items.firstWhere((Product prod) => prod.id == id);
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     // ignore: prefer_final_locals
     Uri url = Uri.https(
       'shop-app-b0190-default-rtdb.firebaseio.com',
       '/products.json',
     );
 
-    http
+    return http
         .post(
       url,
       body: json.encode(
