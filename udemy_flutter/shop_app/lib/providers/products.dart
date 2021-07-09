@@ -21,43 +21,38 @@ class Products with ChangeNotifier {
     return _items.firstWhere((Product prod) => prod.id == id);
   }
 
-  Future<void> addProduct(Product product) {
-    // ignore: prefer_final_locals
-    Uri url = Uri.https(
+  Future<void> addProduct(Product product) async {
+    final Uri url = Uri.https(
       'shop-app-b0190-default-rtdb.firebaseio.com',
       '/products.json',
     );
 
-    return http
-        .post(
-      url,
-      body: json.encode(
-        // ignore: always_specify_types
-        {
-          'title': product.title,
-          'description': product.description,
-          'imageUrl': product.imageUrl,
-          'price': product.price,
-          'isFavorite': product.isFavorite,
-        },
-      ),
-    )
-        .then(
-      (http.Response response) {
-        final Product newProduct = Product(
-          id: json.decode(response.body)['name'].toString(),
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          imageUrl: product.imageUrl,
-        );
-        _items.add(newProduct);
-        notifyListeners();
-      },
-      // ignore: always_specify_types
-    ).catchError((error) {
-      throw error;
-    });
+    try {
+      final http.Response response = await http.post(
+        url,
+        body: json.encode(
+          // ignore: always_specify_types
+          {
+            'title': product.title,
+            'description': product.description,
+            'imageUrl': product.imageUrl,
+            'price': product.price,
+            'isFavorite': product.isFavorite,
+          },
+        ),
+      );
+      final Product newProduct = Product(
+        id: json.decode(response.body)['name'].toString(),
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+      );
+      _items.add(newProduct);
+      notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
   }
 
   void editProduct(String id, Product newProduct) {
