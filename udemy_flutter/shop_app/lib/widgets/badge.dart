@@ -16,8 +16,7 @@ class Badge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
-      // ignore: always_specify_types
-      children: [
+      children: <Widget>[
         child,
         Positioned(
           right: 8,

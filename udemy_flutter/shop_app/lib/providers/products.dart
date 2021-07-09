@@ -54,7 +54,10 @@ class Products with ChangeNotifier {
         _items.add(newProduct);
         notifyListeners();
       },
-    );
+      // ignore: always_specify_types
+    ).catchError((error) {
+      throw error;
+    });
   }
 
   void editProduct(String id, Product newProduct) {
