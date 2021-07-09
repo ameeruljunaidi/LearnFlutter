@@ -16,7 +16,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final FocusNode _imageUrlFocusNode = FocusNode();
   final TextEditingController _imageUrlController = TextEditingController();
   final GlobalKey<FormState> _form = GlobalKey<FormState>();
-  final Product _editedProduct =
+  // ignore: prefer_final_fields, always_specify_types
+  var _editedProduct =
       Product(id: null, title: '', description: '', price: 0, imageUrl: '');
 
   @override
@@ -89,7 +90,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
                 onSaved: (String value) {
-                  Product(
+                  _editedProduct = Product(
                     id: _editedProduct.id,
                     title: value,
                     description: _editedProduct.description,
@@ -119,7 +120,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
                 onSaved: (String value) {
-                  Product(
+                  _editedProduct = Product(
                     id: _editedProduct.id,
                     title: _editedProduct.title,
                     description: _editedProduct.description,
@@ -143,7 +144,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
                 onSaved: (String value) {
-                  Product(
+                  _editedProduct = Product(
                     id: _editedProduct.id,
                     title: _editedProduct.title,
                     description: value,
@@ -201,7 +202,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         return null;
                       },
                       onSaved: (String value) {
-                        Product(
+                        _editedProduct = Product(
                           id: _editedProduct.id,
                           title: _editedProduct.title,
                           description: _editedProduct.description,
