@@ -29,11 +29,14 @@ class OrdersScreen extends StatelessWidget {
                 child: Text('Some error occured'),
               );
             } else {
-              return ListView.builder(
-                itemBuilder: (BuildContext ctx, int i) =>
-                    OrderItem(orderData.orders[i]),
-                itemCount: orderData.orders.length,
-              );
+              return Consumer<Orders>(
+                  builder: (BuildContext ctx, Orders orderData, Widget child) {
+                return ListView.builder(
+                  itemBuilder: (BuildContext ctx, int i) =>
+                      OrderItem(orderData.orders[i]),
+                  itemCount: orderData.orders.length,
+                );
+              });
             }
           }
         },
