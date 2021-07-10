@@ -86,15 +86,36 @@ class Products with ChangeNotifier {
     }
   }
 
-  void editProduct(String id, Product newProduct) {
+  Future<void> editProduct(String id, Product newProduct) async {
     final int prodIndex = _items.indexWhere((Product prod) => prod.id == id);
     if (prodIndex >= 0) {
+      final Uri url = Uri.https(
+        'shop-app-b0190-default-rtdb.firebaseio.com',
+        '/products/$id.json',
+      );
+
+      http.patch(url,
+          // ignore: always_specify_types
+          body: json.encode({
+            'title': newProduct.title,
+            'description': newProduct.description,
+            'imageUrl': newProduct.imageUrl,
+            'price': newProduct.price,
+          }));
+
       _items[prodIndex] = newProduct;
       notifyListeners();
     }
   }
 
   void deleteProduct(String id) {
+    final Uri url = Uri.https(
+      'shop-app-b0190-default-rtdb.firebaseio.com',
+      '/products/$id.json',
+    );
+
+  http.delete(url)
+
     _items.removeWhere((Product prod) => prod.id == id);
     notifyListeners();
   }
