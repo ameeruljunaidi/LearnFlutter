@@ -20,11 +20,48 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   // ignore: always_specify_types
-  final List<OrderItem> _orders = [];
+  List<OrderItem> _orders = [];
 
   List<OrderItem> get orders {
     // ignore: always_specify_types
     return [..._orders];
+  }
+
+  Future<void> fetchAndSetOrders() async {
+    final Uri url = Uri.https(
+      'shop-app-b0190-default-rtdb.firebaseio.com',
+      '/orders.json',
+    );
+
+    final http.Response response = await http.get(url);
+    final List<OrderItem> loadedOrders = <OrderItem>[];
+    final Map<String, dynamic> extractedData =
+        json.decode(response.body) as Map<String, dynamic>;
+    extractedData.forEach(
+      // ignore: always_specify_types
+      (String orderId, orderData) {
+        loadedOrders.add(
+          OrderItem(
+            id: orderId,
+            amount: orderData['amount'] as double,
+            products: (orderData['products'] as List<dynamic>)
+                .map(
+                  // ignore: always_specify_types
+                  (item) => CartItem(
+                    id: item['id'] as String,
+                    title: item['title'] as String,
+                    quantity: item['quantity'] as int,
+                    price: item['price'] as double,
+                  ),
+                )
+                .toList(),
+            dateTime: DateTime.parse(orderData['dateTime'].toString()),
+          ),
+        );
+      },
+    );
+    _orders = loadedOrders;
+    notifyListeners();
   }
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
