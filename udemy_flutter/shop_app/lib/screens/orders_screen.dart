@@ -12,7 +12,7 @@ class OrdersScreen extends StatefulWidget {
 }
 
 class _OrdersScreenState extends State<OrdersScreen> {
-  bool _isLoading = true;
+  bool _isLoading = false;
   bool _isInit = true;
 
   @override

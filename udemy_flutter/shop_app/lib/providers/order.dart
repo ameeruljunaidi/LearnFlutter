@@ -37,6 +37,11 @@ class Orders with ChangeNotifier {
     final List<OrderItem> loadedOrders = <OrderItem>[];
     final Map<String, dynamic> extractedData =
         json.decode(response.body) as Map<String, dynamic>;
+
+    if (extractedData == null) {
+      return;
+    }
+
     extractedData.forEach(
       // ignore: always_specify_types
       (String orderId, orderData) {

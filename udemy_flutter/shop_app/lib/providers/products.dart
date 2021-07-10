@@ -33,6 +33,11 @@ class Products with ChangeNotifier {
       final Map<String, dynamic> extractedData =
           json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = <Product>[];
+
+      if (extractedData == null) {
+        return;
+      }
+
       extractedData.forEach(
         (String prodId, dynamic prodData) {
           loadedProducts.add(
