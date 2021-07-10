@@ -9,8 +9,6 @@ class OrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Orders orderData = Provider.of<Orders>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Orders'),
@@ -40,7 +38,7 @@ class OrdersScreen extends StatelessWidget {
             }
           }
         },
-        future: Provider.of<Orders>(context).fetchAndSetOrders(),
+        future: Provider.of<Orders>(context, listen: false).fetchAndSetOrders(),
       ),
       drawer: AppDrawer(),
     );
