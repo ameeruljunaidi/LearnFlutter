@@ -30,7 +30,7 @@ class Orders with ChangeNotifier {
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
     final Uri url = Uri.https(
       'shop-app-b0190-default-rtdb.firebaseio.com',
-      '/products.json',
+      '/orders.json',
     );
 
     final DateTime timeStamp = DateTime.now();
@@ -38,11 +38,13 @@ class Orders with ChangeNotifier {
     // ignore: always_specify_types
     final http.Response response = await http.post(
       url,
+      // ignore: always_specify_types
       body: json.encode({
         'amount': total,
         'dateTime': timeStamp.toIso8601String(),
         // ignore: always_specify_types
         'products': cartProducts
+            // ignore: always_specify_types
             .map((CartItem cp) => {
                   'id': cp.id,
                   'title': cp.title,
